@@ -23,6 +23,7 @@ angular
     'eversnapApp.directives'
   ])
   .constant('templates', {
+    'navbar': 'views/esNavbar.html',
     'main': 'views/main.html',
     'album': 'views/album.html',
     'albumThumbnail': 'views/albumThumbnail.html',
@@ -43,7 +44,7 @@ angular
         controllerAs: 'vm'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/#/'
       });
 
     localStorageServiceProvider
@@ -51,4 +52,9 @@ angular
       .setStorageType('localStorage');
 
     FacebookProvider.init('722565341155662');
+  })
+  .run(function (Session, $rootScope) {
+    Session.start().then(function () {
+      $rootScope.$broadcast('SESSION_STARTED')
+    });
   });

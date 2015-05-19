@@ -4,18 +4,18 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    Actions <span class="pull-right">Logged: <div class="circle" ng-style="{ background: vm.loggedIn ? 'green':'red'}"></div></span>
+    Actions <span class="pull-right">Logged: <div class="circle" ng-style="{ background: vm.session.loggedIn ? 'green':'red'}"></div></span>
   </div>
   <div class="panel-body">
-    <a class="btn btn-default" ng-click="vm.login()" ng-disabled="vm.loggedIn">connect</a>
-    <a class="btn btn-default" ng-click="vm.logout()" ng-disabled="!vm.loggedIn">Disconnect</a>
+    <a class="btn btn-default" ng-click="vm.login()" ng-disabled="vm.session.loggedIn">connect</a>
+    <a class="btn btn-default" ng-click="vm.logout()" ng-disabled="!vm.session.loggedIn">Disconnect</a>
   </div>
 </div>
 
-<div class="well" ng-if="vm.albums">
+<div class="well" ng-if="vm.albums.data">
   <h3>Your album:</h3>
   <div class="row">
-    <div ng-repeat="al in vm.albums">
+    <div ng-repeat="al in vm.albums.data">
       <es-album-thumbnail album="al"></es-album-thumbnail>
     </div>
   </div>

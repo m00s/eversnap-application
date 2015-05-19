@@ -10,18 +10,31 @@
 angular.module('eversnapApp.controllers')
   .controller('AlbumCtrl', AlbumCtrl);
 
-function AlbumCtrl($routeParams, Facebook, AccessToken, $modal, templates) {
+function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootScope) {
 
   var vm = this;
 
   vm.access_token = AccessToken.get();
   vm.photos = [];
+  vm.albumId = $routeParams.albumId;
 
-  (function fetchPhotos() {
-    Facebook.api('/' + $routeParams.albumId + '/photos?access_token=' + vm.access_token, function(response) {
+  $rootScope.$on('SESSION_STARTED', fetchPhotos);
+
+  function fetchPhotos() {
+    console.log('fetchPhotos()');
+    Album.fetchPhotos(vm.albumId).then(function(response){
       vm.photos = response.data;
+      if (Album.get().data) {
+        console.log('full');
+        vm.album = Album.get(vm.albumId);
+      }
+      else {
+        Album.fetch().then(function () {
+          vm.album = Album.get(vm.albumId);
+        });
+      }
     });
-  })();
+  }
 
   vm.open = function (id) {
     var modalInstance = $modal.open({
@@ -42,4 +55,6 @@ function AlbumCtrl($routeParams, Facebook, AccessToken, $modal, templates) {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+  fetchPhotos();
 }
