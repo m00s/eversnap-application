@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the eversnapApp.controllers
  */
-angular.module('eversnapApp.controllers', [])
+angular.module('eversnapApp.controllers', ['ui.bootstrap'])
   .controller('MainCtrl', AuthController);
 
 function AuthController(Facebook, AccessToken) {

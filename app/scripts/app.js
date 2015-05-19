@@ -30,7 +30,8 @@ angular
       })
       .when('/album/:albumId', {
         templateUrl: 'views/album.html',
-        controller: 'AlbumCtrl'
+        controller: 'AlbumCtrl',
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'

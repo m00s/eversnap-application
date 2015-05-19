@@ -8,17 +8,38 @@
  * Controller of the eversnapApp.controllers
  */
 angular.module('eversnapApp.controllers')
-  .controller('AlbumCtrl', function ($scope, $routeParams, Facebook, AccessToken) {
+  .controller('AlbumCtrl', AlbumCtrl);
 
-    $scope.access_token = AccessToken.get();
-    $scope.photos = [];
+function AlbumCtrl($routeParams, Facebook, AccessToken, $modal) {
 
-    $scope.fetchPhotos = function() {
-      Facebook.api('/' + $routeParams.albumId + '/photos?access_token=' + $scope.access_token, function(response) {
-        $scope.photos = response.data;
-        console.log('photos:',$scope.photos);
-      });
-    };
+  var vm = this;
 
-    $scope.fetchPhotos();
-  });
+  vm.access_token = AccessToken.get();
+  vm.photos = [];
+
+  (function fetchPhotos() {
+    Facebook.api('/' + $routeParams.albumId + '/photos?access_token=' + vm.access_token, function(response) {
+      vm.photos = response.data;
+    });
+  })();
+
+  vm.open = function (id) {
+    var modalInstance = $modal.open({
+      animation: true,
+      templateUrl: 'views/photoModal.html',
+      controller: 'ModalInstanceCtrl as vm',
+      size: 'lg',
+      resolve: {
+        photoId: function () {
+          return id;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (photoId) {
+      vm.selected = photoId;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+}
