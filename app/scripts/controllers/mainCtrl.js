@@ -10,6 +10,8 @@
 angular.module('eversnapApp.controllers', ['ui.bootstrap'])
   .controller('MainCtrl', AuthController);
 
+AuthController.inject = ['AccessToken', 'Session', 'Album', '$rootScope'];
+
 function AuthController(AccessToken, Session, Album, $rootScope) {
 
   var vm = this;

@@ -11,8 +11,7 @@ angular.module('eversnapApp.directives')
     return {
       templateUrl: templates.navbar,
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        console.log('Nav loaded');
+      link: function postLink() {
       }
     };
   });

@@ -14,7 +14,7 @@ angular.module('eversnapApp.directives')
       scope: {
         comments: '='
       },
-      controller: angular.identity,
+      controller: angular.noop,
       controllerAs: 'vm',
       bindToController: true
     };

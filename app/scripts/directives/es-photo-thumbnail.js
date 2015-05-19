@@ -15,7 +15,7 @@ angular.module('eversnapApp.directives')
         photos: '=',
         onClick: '&'
       },
-      controller: angular.identity,
+      controller: angular.noop,
       controllerAs: 'vm',
       bindToController: true
     };
