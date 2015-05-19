@@ -115,13 +115,28 @@ body {
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
 }
 
-.thumbnail img{
+.gallery {
+  height: 200px;
   width: 100%;
-  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
-.thumbnail.caption {
-  height: 20%;
+.thumbnail img{
+}
+
+.thumbnail .caption {
+  text-align: end !important;
+  vertical-align: middle;
+}
+
+.thumbnail .caption .place {
+  font-size: 0.75em;
+  max-width: 75%;
+  padding-top: 5px;
+  color: grey;
 }
 
 .photo-data {
