@@ -22,15 +22,23 @@ angular
     'eversnapApp.services',
     'eversnapApp.directives'
   ])
-  .config(function ($routeProvider, localStorageServiceProvider, FacebookProvider) {
+  .constant('templates', {
+    'main': 'views/main.html',
+    'album': 'views/album.html',
+    'albumThumbnail': 'views/albumThumbnail.html',
+    'photoModal': 'views/photoModal.html',
+    'photoComments': 'views/photoComments.html',
+    'photoThumbnail': 'views/photoThumbnail.html'
+  })
+  .config(function (templates, $routeProvider, localStorageServiceProvider, FacebookProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: templates.main,
         controller: 'MainCtrl',
         controllerAs: 'vm'
       })
       .when('/album/:albumId', {
-        templateUrl: 'views/album.html',
+        templateUrl: templates.album,
         controller: 'AlbumCtrl',
         controllerAs: 'vm'
       })

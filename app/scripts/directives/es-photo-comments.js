@@ -7,9 +7,9 @@
  * # esPhotoComments
  */
 angular.module('eversnapApp.directives')
-  .directive('esPhotoComments', function () {
+  .directive('esPhotoComments', function (templates) {
     return {
-      templateUrl: 'views/photoComments.html',
+      templateUrl: templates.photoComments,
       restrict: 'E',
       scope: {
         comments: '='

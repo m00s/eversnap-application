@@ -7,9 +7,9 @@
  * # esPhotoThumbnail
  */
 angular.module('eversnapApp.directives')
-  .directive('esPhotoThumbnail', function () {
+  .directive('esPhotoThumbnail', function(templates) {
     return {
-      templateUrl: 'views/photoThumbnail.html',
+      templateUrl: templates.photoThumbnail,
       restrict: 'E',
       scope: {
         photos: '=',

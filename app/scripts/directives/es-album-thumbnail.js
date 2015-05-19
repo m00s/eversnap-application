@@ -7,10 +7,10 @@
  * # esAlbumThumbnail
  */
 angular.module('eversnapApp.directives', [])
-  .directive('esAlbumThumbnail', function () {
+  .directive('esAlbumThumbnail', function (templates) {
     return {
       restrict: 'E',
-      templateUrl: 'views/albumThumbnail.html',
+      templateUrl: templates.albumThumbnail,
       scope: {
         album: '='
       },

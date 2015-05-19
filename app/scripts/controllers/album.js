@@ -10,7 +10,7 @@
 angular.module('eversnapApp.controllers')
   .controller('AlbumCtrl', AlbumCtrl);
 
-function AlbumCtrl($routeParams, Facebook, AccessToken, $modal) {
+function AlbumCtrl($routeParams, Facebook, AccessToken, $modal, templates) {
 
   var vm = this;
 
@@ -26,7 +26,7 @@ function AlbumCtrl($routeParams, Facebook, AccessToken, $modal) {
   vm.open = function (id) {
     var modalInstance = $modal.open({
       animation: true,
-      templateUrl: 'views/photoModal.html',
+      templateUrl: templates.photoModal,
       controller: 'ModalInstanceCtrl as vm',
       size: 'lg',
       resolve: {
