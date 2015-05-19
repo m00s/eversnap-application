@@ -1,0 +1,9 @@
+<div class="col-xs-6 col-md-3">
+  <a ng-href="#/album/{{vm.album.id}}" class="thumbnail">
+    <img
+      ng-src="https://graph.facebook.com/{{vm.album.cover_photo}}/picture?type=album&access_token={{vm.access_token}}"
+      class="img-responsive clickable"
+      alt="photo">
+    <span>{{vm.album.name}}</span>
+  </a>
+</div>

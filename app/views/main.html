@@ -16,19 +16,7 @@
   <h3>Album:</h3>
   <div class="row">
     <div ng-repeat="al in vm.albums">
-      <div class="col-xs-6 col-md-3">
-        <a ng-href="#/album/{{al.id}}" class="thumbnail">
-          <img
-            ng-src="https://graph.facebook.com/{{al.cover_photo}}/picture?type=album&access_token={{vm.access_token}}"
-            class="img-responsive clickable"
-            alt="photo">
-          <span>{{al.name}}</span>
-        </a>
-      </div>
+      <es-album-thumbnail album="al"></es-album-thumbnail>
     </div>
   </div>
-</div>
-
-<div class="row marketing">
-  <p>Made with <span>&hearts;</span></p>
 </div>

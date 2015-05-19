@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'facebook',
     'eversnapApp.controllers',
-    'eversnapApp.services'
+    'eversnapApp.services',
+    'eversnapApp.directives'
   ])
   .config(function ($routeProvider, localStorageServiceProvider, FacebookProvider) {
     $routeProvider

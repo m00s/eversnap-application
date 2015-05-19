@@ -12,7 +12,7 @@
     </div>
     <br>
     <div>
-      <p>Likes: {{vm.photo.likes.data.length}}</p>
+      <p>Likes: {{vm.photo.likes.data.length || '0'}}</p>
     </div>
     <div>
       <dl ng-repeat="c in vm.photo.comments.data">
