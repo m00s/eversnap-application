@@ -10,9 +10,9 @@
 angular.module('eversnapApp.controllers')
   .controller('AlbumCtrl', AlbumCtrl);
 
-AlbumCtrl.$inject = ['$routeParams', 'AccessToken', '$modal', 'templates', 'Album', '$rootScope'];
+AlbumCtrl.$inject = ['$routeParams', 'AccessToken', '$modal', 'templates', 'Album', '$rootScope', '$location', 'Session'];
 
-function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootScope) {
+function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootScope, $location, Session) {
 
   var vm = this;
 
@@ -27,11 +27,8 @@ function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootSco
       vm.photos = response.data;
       if (Album.get().data) {
         vm.album = Album.get(vm.albumId);
-      }
-      else {
-        Album.fetch().then(function () {
-          vm.album = Album.get(vm.albumId);
-        });
+        if(!vm.album)
+          goHome();
       }
     });
   }
@@ -51,9 +48,12 @@ function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootSco
 
     modalInstance.result.then(function (photoId) {
       vm.selected = photoId;
-    }, function () {
     });
   };
 
-  fetchPhotos();
+  function goHome() {
+    $location.path('/');
+  }
+
+  Session.started().then(fetchPhotos, goHome)
 }

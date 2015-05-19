@@ -15,17 +15,20 @@ angular.module('eversnapApp.services')
     function fetchAlbum(profileId) {
       var deferred = $q.defer();
 
-      Facebook.api('/' + profileId + '/albums',
-        function (response) {
-          if (response && !response.error) {
-            albums = response;
-            deferred.resolve(albums);
-          }
-          else {
-            console.error(response.error);
-            deferred.reject(response.error);
-          }
-        });
+      if(profileId)
+        Facebook.api('/' + profileId + '/albums',
+          function (response) {
+            if (response && !response.error) {
+              albums = response;
+              deferred.resolve(albums);
+            }
+            else {
+              console.error(response.error);
+              deferred.reject(response.error);
+            }
+          });
+      else
+        deferred.reject('No profile id provided');
 
       return deferred.promise;
     }

@@ -54,7 +54,7 @@ angular
     FacebookProvider.init('722565341155662');
   })
   .run(function (Session, $rootScope) {
-    Session.start().then(function () {
+    Session.start().then(function() {
       $rootScope.$broadcast('SESSION_STARTED')
     });
   });

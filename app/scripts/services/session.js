@@ -23,10 +23,14 @@ angular.module('eversnapApp.services')
 
     function login() {
       var deferred = $q.defer();
+      sessionPromise = $q.defer();
+      promise = sessionPromise.promise;
 
       Facebook.login(function(response) {
         AccessToken.set(response.authResponse.accessToken);
-        deferred.resolve(response);
+        getLoginStatus().then(function(){
+          deferred.resolve();
+        });
       });
 
       return deferred.promise;
@@ -60,14 +64,17 @@ angular.module('eversnapApp.services')
                   deferred.resolve();
                 }, function(){
                   console.log('error in fetching album');
+                  sessionPromise.reject();
                 });
             }, function(){
               console.log('error in fetching profile');
+              sessionPromise.reject();
             });
         }
-        else{
+        else {
           session.loggedIn = false;
           deferred.reject();
+          sessionPromise.reject();
         }
       });
 
@@ -83,7 +90,7 @@ angular.module('eversnapApp.services')
       logout: logout,
       start: getLoginStatus,
       get: getSession,
-      getPromise: getPromise
+      started: getPromise
     }
 
   });

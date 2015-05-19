@@ -23,22 +23,17 @@ function AuthController(AccessToken, Session, Album, $rootScope) {
   fetchAlbum();
 
   vm.login = function() {
-    Session.login().then(function () {
-      Session.start().then(fetchAlbum);
-    })
+    Session.login().then(fetchAlbum);
   };
 
   vm.logout = function() {
     Session.logout().then(fetchAlbum);
   };
 
-  if(!vm.session.loggedIn){
-    Session.start().then(fetchAlbum);
-  }
-
   function fetchAlbum(){
     vm.albums = Album.get();
   }
 
   $rootScope.$on('SESSION_STARTED', fetchAlbum);
+
 }
