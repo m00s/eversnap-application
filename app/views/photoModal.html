@@ -15,18 +15,9 @@
       <p>Likes: {{vm.photo.likes.data.length || '0'}}</p>
     </div>
     <div>
-      <dl ng-repeat="c in vm.photo.comments.data">
-        <dt>{{c.from.name}}</dt>
-        <dd>
-          &nbsp; {{c.message}}
-          <small>
-            <span class="pull-right">
-              <img src="images/like.png" style="width: 35%; height: 35%;"/>
-              {{c.like_count || '0'}}
-            </span>
-          </small>
-        </dd>
-      </dl>
+      <es-photo-comments
+        comments="vm.photo.comments.data">
+      </es-photo-comments>
     </div>
   </div>
 </div>

@@ -2,18 +2,17 @@
 
 /**
  * @ngdoc directive
- * @name eversnapApp.directive:esPhotoThumbnail
+ * @name eversnapApp.directive:esPhotoComments
  * @description
- * # esPhotoThumbnail
+ * # esPhotoComments
  */
 angular.module('eversnapApp.directives')
-  .directive('esPhotoThumbnail', function () {
+  .directive('esPhotoComments', function () {
     return {
-      templateUrl: 'views/photoThumbnail.html',
+      templateUrl: 'views/photoComments.html',
       restrict: 'E',
       scope: {
-        photos: '=',
-        onClick: '&'
+        comments: '='
       },
       controller: angular.identity,
       controllerAs: 'vm',

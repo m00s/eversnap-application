@@ -1,0 +1,12 @@
+<dl ng-repeat="c in vm.comments">
+  <dt>{{c.from.name}}</dt>
+  <dd>
+    &nbsp; {{c.message}}
+    <small>
+      <span class="pull-right">
+        <img src="images/like.png" style="width: 35%; height: 35%;"/>
+        {{c.like_count || '0'}}
+      </span>
+    </small>
+  </dd>
+</dl>
