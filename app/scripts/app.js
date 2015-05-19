@@ -16,19 +16,29 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'facebook',
+    'eversnapApp.controllers',
+    'eversnapApp.services'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, localStorageServiceProvider, FacebookProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        controllerAs: 'vm'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/album/:albumId', {
+        templateUrl: 'views/album.html',
+        controller: 'AlbumCtrl'
       })
       .otherwise({
         redirectTo: '/'
       });
+
+    localStorageServiceProvider
+      .setPrefix('eversnap')
+      .setStorageType('localStorage');
+
+    FacebookProvider.init('722565341155662');
   });

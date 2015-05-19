@@ -1,23 +1,34 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="page-header">
+  <h1>Facebook <small>and more</small></h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Actions <span class="pull-right">Logged: <div class="circle" ng-style="{ background: vm.loggedIn ? 'green':'red'}"></div></span>
+  </div>
+  <div class="panel-body">
+    <a class="btn btn-default" ng-click="vm.login()" ng-disabled="vm.loggedIn">connect</a>
+    <a class="btn btn-default" ng-click="vm.logout()" ng-disabled="!vm.loggedIn">Disconnect</a>
+  </div>
+</div>
+
+<div class="well" ng-if="vm.albums">
+  <h3>Album:</h3>
+  <div class="row">
+    <div ng-repeat="al in vm.albums">
+      <div class="col-xs-6 col-md-3">
+        <a ng-href="#/album/{{al.id}}" class="thumbnail">
+          <img
+            ng-src="https://graph.facebook.com/{{al.cover_photo}}/picture?type=album&access_token={{vm.access_token}}"
+            class="img-responsive clickable"
+            alt="photo">
+          <span>{{al.name}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+  <p>Made with <span>&hearts;</span></p>
 </div>
