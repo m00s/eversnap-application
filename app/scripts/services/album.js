@@ -22,7 +22,7 @@ angular.module('eversnapApp.services')
             deferred.resolve(albums);
           }
           else {
-            console.log(response.error);
+            console.error(response.error);
             deferred.reject(response.error);
           }
         });

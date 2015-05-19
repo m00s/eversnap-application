@@ -23,11 +23,9 @@ function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootSco
   $rootScope.$on('SESSION_STARTED', fetchPhotos);
 
   function fetchPhotos() {
-    console.log('fetchPhotos()');
     Album.fetchPhotos(vm.albumId).then(function(response){
       vm.photos = response.data;
       if (Album.get().data) {
-        console.log('full');
         vm.album = Album.get(vm.albumId);
       }
       else {
@@ -54,7 +52,6 @@ function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootSco
     modalInstance.result.then(function (photoId) {
       vm.selected = photoId;
     }, function () {
-      console.log('Modal dismissed at: ' + new Date());
     });
   };
 

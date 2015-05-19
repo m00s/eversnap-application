@@ -67,6 +67,7 @@ angular.module('eversnapApp.services')
         }
         else{
           session.loggedIn = false;
+          deferred.reject();
         }
       });
 

@@ -23,7 +23,9 @@ function AuthController(AccessToken, Session, Album, $rootScope) {
   fetchAlbum();
 
   vm.login = function() {
-    Session.login().then(fetchAlbum())
+    Session.login().then(function () {
+      Session.start().then(fetchAlbum);
+    })
   };
 
   vm.logout = function() {
@@ -31,9 +33,7 @@ function AuthController(AccessToken, Session, Album, $rootScope) {
   };
 
   if(!vm.session.loggedIn){
-    Session.start().then(function () {
-      $rootScope.$broadcast('SESSION_STARTED')
-    });
+    Session.start().then(fetchAlbum);
   }
 
   function fetchAlbum(){
