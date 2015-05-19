@@ -1,0 +1,15 @@
+<div ng-repeat="photo in vm.photos">
+  <div class="col-md-3 col-sm-4 col-xs-6">
+    <div class="thumbnail" ng-click="vm.onClick({id: photo.id})">
+          <span class="img-thumbnail">
+            <img class="shadow clickable" ng-src="{{photo.images[0].source}}" />
+          </span>
+      <div class="caption">
+        <img class="photo-data" src="images/comment.png"/>
+        <span>{{photo.comments.data.length || '0'}}</span>
+        <img class="photo-data" src="images/like.png"/>
+        <span>{{photo.likes.data.length || '0'}}</span>
+      </div>
+    </div>
+  </div>
+</div>
