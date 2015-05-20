@@ -24,7 +24,7 @@ function SessionService(Facebook, AccessToken, Album, Profile, $q) {
   return {
     login: login,
     logout: logout,
-    start: getLoginStatus,
+    start: startSession,
     get: getSession,
     started: getPromise
   };
@@ -44,7 +44,7 @@ function SessionService(Facebook, AccessToken, Album, Profile, $q) {
 
     Facebook.login(function(response) {
       AccessToken.set(response.authResponse.accessToken);
-      getLoginStatus().then(function(){
+      startSession().then(function(){
         deferred.resolve();
       });
     });
@@ -58,18 +58,23 @@ function SessionService(Facebook, AccessToken, Album, Profile, $q) {
     Facebook.logout(function() {
       AccessToken.destroy();
       Album.destroy();
-      getLoginStatus();
+      startSession();
       deferred.resolve();
     });
 
     return deferred.promise;
   }
 
-  function getLoginStatus() {
+  function startSession() {
     var deferred = $q.defer();
 
     Facebook.getLoginStatus(function(response) {
       if(response.status === 'connected') {
+
+        if(!AccessToken.isDefined()){
+          AccessToken.set(response.authResponse.accessToken);
+        }
+
         session.loggedIn = true;
 
         Profile.fetch()

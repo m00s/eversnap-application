@@ -7,13 +7,13 @@
     Actions <div class="circle pull-right" ng-style="{ background: vm.session.loggedIn ? 'green':'red'}"></div> <span class="pull-right">Logged:</span>
   </div>
   <div class="panel-body">
-    <a class="btn btn-default" ng-click="vm.login()" ng-disabled="vm.session.loggedIn">connect</a>
-    <a class="btn btn-default" ng-click="vm.logout()" ng-disabled="!vm.session.loggedIn">Disconnect</a>
+    <a class="btn btn-default" ng-click="vm.login()" ng-disabled="vm.session.loggedIn">sign in</a>
+    <a class="btn btn-default" ng-click="vm.logout()" ng-disabled="!vm.session.loggedIn">sign out</a>
   </div>
 </div>
 
 <div class="well">
-  <h4 ng-if="!vm.session.loggedIn">Connect to view your photos</h4>
+  <h4 ng-if="!vm.session.loggedIn">Sign in to view your photos</h4>
   <div ng-if="!vm.albums.data && vm.session.loggedIn">
     <span
       us-spinner
