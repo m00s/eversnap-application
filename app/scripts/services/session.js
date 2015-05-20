@@ -46,6 +46,8 @@ function SessionService(Facebook, AccessToken, Album, Profile, $q) {
       AccessToken.set(response.authResponse.accessToken);
       startSession().then(function(){
         deferred.resolve();
+      }, function (e) {
+        deferred.reject(e);
       });
     });
 
@@ -83,13 +85,11 @@ function SessionService(Facebook, AccessToken, Album, Profile, $q) {
               .then(function(){
                 sessionPromise.resolve();
                 deferred.resolve();
-              }, function(){
-                console.log('error in fetching album');
-                sessionPromise.reject();
+              }, function(e){
+                sessionPromise.reject(e);
               });
-          }, function(){
-            console.log('error in fetching profile');
-            sessionPromise.reject();
+          }, function(e){
+            sessionPromise.reject(e);
           });
       }
       else {
