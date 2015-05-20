@@ -16,6 +16,7 @@ angular.module('eversnapApp.controllers')
   .controller('ModalInstanceCtrl', PhotoModalCtrl);
 
 function PhotoModalCtrl($modalInstance, photoId, Facebook, AccessToken) {
+  /* jshint validthis: true */
   var vm = this;
 
   vm.photoId = photoId;

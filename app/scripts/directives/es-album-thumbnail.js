@@ -29,6 +29,7 @@ angular.module('eversnapApp.directives', [])
 albumThumbnailCtrl.$inject = ['AccessToken'];
 
 function albumThumbnailCtrl(AccessToken) {
+  /* jshint validthis: true */
   var vm = this;
   vm.access_token = AccessToken.get();
 }

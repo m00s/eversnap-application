@@ -56,6 +56,6 @@ angular
   })
   .run(function (Session, $rootScope) {
     Session.start().then(function() {
-      $rootScope.$broadcast('SESSION_STARTED')
+      $rootScope.$broadcast('SESSION_STARTED');
     });
   });

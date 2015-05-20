@@ -281,8 +281,8 @@ module.exports = function (grunt) {
         dest: 'docs',
         html5Mode: true,
         startPage: '/api',
-        title: "Assignment application",
-        titleLink: "/api",
+        title: 'Assignment application',
+        titleLink: '/api',
         bestMatch: true
       },
       api: {

@@ -40,6 +40,7 @@ function AccessTokenService(localStorageService) {
 
   function destroyToken() {
     localStorageService.remove('facebook.session');
-    return token = null;
+    token = null;
+    return token;
   }
 }

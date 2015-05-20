@@ -67,7 +67,7 @@ function AlbumService(Facebook, AccessToken, $q) {
 
   function searchById(id) {
     for(var i = 0; i < albums.data.length; i++) {
-      if(albums.data[i].id == id) {
+      if(albums.data[i].id === id) {
         return albums.data[i];
       }
     }

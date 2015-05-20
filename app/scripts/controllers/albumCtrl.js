@@ -35,8 +35,9 @@ function AlbumCtrl($routeParams, $modal, templates, Album, $rootScope, $location
       vm.photos = response.data;
       if (Album.get().data) {
         vm.album = Album.get(vm.albumId);
-        if(!vm.album)
+        if(!vm.album){
           goHome();
+        }
       }
     });
   }
@@ -63,5 +64,5 @@ function AlbumCtrl($routeParams, $modal, templates, Album, $rootScope, $location
     $location.path('/');
   }
 
-  Session.started().then(fetchPhotos, goHome)
+  Session.started().then(fetchPhotos, goHome);
 }
