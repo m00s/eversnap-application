@@ -1,3 +1,17 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name eversnapApp.controller:ModalInstanceCtrl
+ * @description
+ * Controller of the eversnapApp.controllers
+ * Load and display image and comments.
+ *
+ * @requires $modalInstance
+ * @requires photoId
+ * @requires Facebook
+ * @requires AccessToken
+ */
 angular.module('eversnapApp.controllers')
   .controller('ModalInstanceCtrl', PhotoModalCtrl);
 

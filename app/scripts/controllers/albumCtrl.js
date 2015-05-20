@@ -4,8 +4,16 @@
  * @ngdoc function
  * @name eversnapApp.controller:AlbumCtrl
  * @description
- * # AlbumCtrl
- * Controller of the eversnapApp.controllers
+ * Controller of the eversnapApp.controllers.
+ * Handle modal open passing a callback to inner directive.
+ *
+ * @requires $routeParams
+ * @requires $modal
+ * @requires templates
+ * @requires Album
+ * @requires $rootScope
+ * @requires $location
+ * @requires Session
  */
 angular.module('eversnapApp.controllers')
   .controller('AlbumCtrl', AlbumCtrl);

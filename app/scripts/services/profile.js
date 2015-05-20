@@ -2,10 +2,12 @@
 
 /**
  * @ngdoc service
- * @name eversnapApp.Profile
+ * @name eversnapApp.services.Profile
  * @description
- * # Profile
- * Service in the eversnapApp.services
+ * Service in the eversnapApp.services that fetch user's profile from Facebook api
+ *
+ * @requires Facebook
+ * @requires $q
  */
 angular.module('eversnapApp.services')
   .factory('Profile', ProfileService);

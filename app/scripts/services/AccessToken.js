@@ -1,5 +1,14 @@
 'use strict';
 
+/**
+ * @ngdoc service
+ * @name eversnapApp.services.AccessToken
+ * @description
+ * Service in the eversnapApp.services that manage access token, storing it in local storage
+ *
+ * @requires localStorageService
+ */
+
 angular.module('eversnapApp.services', ['LocalStorageModule', 'facebook'])
   .factory('AccessToken', AccessTokenService);
 

@@ -4,8 +4,13 @@
  * @ngdoc function
  * @name eversnapApp.controller:MainCtrl
  * @description
- * # MainCtrl
- * Controller of the eversnapApp.controllers
+ * Controller of the eversnapApp.controllers.
+ * Handle auth btns and album's fetch
+ *
+ * @requires AccessToken
+ * @requires Session
+ * @requires Album
+ * @requires $rootScope
  */
 angular.module('eversnapApp.controllers', ['ui.bootstrap'])
   .controller('MainCtrl', AuthController);

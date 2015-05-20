@@ -2,10 +2,13 @@
 
 /**
  * @ngdoc service
- * @name eversnapApp.Album
+ * @name eversnapApp.services.Album
  * @description
- * # Album
- * Service in the eversnapApp.services
+ * Service in the eversnapApp.services that allows album and photo fetch.
+ *
+ * @requires Facebook
+ * @requires AccessToken
+ * @requires $q
  */
 angular.module('eversnapApp.services')
   .factory('Album', AlbumService);

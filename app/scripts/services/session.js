@@ -2,10 +2,15 @@
 
 /**
  * @ngdoc service
- * @name eversnapApp.Session
+ * @name eversnapApp.services.Session
  * @description
- * # Session
- * Service in the eversnapApp.services
+ * Service in the eversnapApp.services that handle the entire user session.
+ *
+ * @requires Facebook
+ * @requires AccessToken
+ * @requires Album
+ * @requires Profile
+ * @requires $q
  */
 angular.module('eversnapApp.services')
   .factory('Session', SessionService);

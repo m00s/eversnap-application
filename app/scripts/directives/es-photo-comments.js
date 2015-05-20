@@ -4,7 +4,13 @@
  * @ngdoc directive
  * @name eversnapApp.directive:esPhotoComments
  * @description
- * # esPhotoComments
+ * esPhotoComments render all photo comments, passed as prop to the directive.
+ *
+ * @restrict E
+ * @element ANY
+ * @scope
+ *
+ * @requires templates
  */
 angular.module('eversnapApp.directives')
   .directive('esPhotoComments', function (templates) {
