@@ -24,6 +24,7 @@
   </div>
   <div ng-if="vm.albums.data">
     <h3 ng-if="vm.session.loggedIn">Album</h3>
+    <h5 ng-if="vm.session.loggedIn && !vm.albums.data.length">There is no publicly available album</h5>
     <div class="row">
       <div ng-repeat="al in vm.albums.data">
         <es-album-thumbnail album="al"></es-album-thumbnail>
