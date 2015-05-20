@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('eversnapApp.services', ['LocalStorageModule'])
+angular.module('eversnapApp.services', ['LocalStorageModule', 'facebook'])
   .factory('AccessToken', function AccessToken(localStorageService) {
     var token = localStorageService.get('facebook.session');
 

@@ -17,13 +17,12 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'facebook',
+    'angularSpinner',
     'eversnapApp.controllers',
     'eversnapApp.services',
     'eversnapApp.directives'
   ])
   .constant('templates', {
-    'navbar': 'views/esNavbar.html',
     'main': 'views/main.html',
     'album': 'views/album.html',
     'albumThumbnail': 'views/albumThumbnail.html',
@@ -31,7 +30,7 @@ angular
     'photoComments': 'views/photoComments.html',
     'photoThumbnail': 'views/photoThumbnail.html'
   })
-  .config(function (templates, $routeProvider, localStorageServiceProvider, FacebookProvider) {
+  .config(function (templates, $routeProvider, localStorageServiceProvider, FacebookProvider, usSpinnerConfigProvider) {
     $routeProvider
       .when('/', {
         templateUrl: templates.main,
@@ -50,6 +49,8 @@ angular
     localStorageServiceProvider
       .setPrefix('eversnap')
       .setStorageType('localStorage');
+
+    usSpinnerConfigProvider.setDefaults({color: 'blue', radius:8, length:0, lines: 20, width: 2, corners: 1, rotate: 0, trail:83, speed:2});
 
     FacebookProvider.init('722565341155662');
   })

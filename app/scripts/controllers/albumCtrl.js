@@ -10,15 +10,15 @@
 angular.module('eversnapApp.controllers')
   .controller('AlbumCtrl', AlbumCtrl);
 
-AlbumCtrl.$inject = ['$routeParams', 'AccessToken', '$modal', 'templates', 'Album', '$rootScope', '$location', 'Session'];
+AlbumCtrl.$inject = ['$routeParams', '$modal', 'templates', 'Album', '$rootScope', '$location', 'Session'];
 
-function AlbumCtrl($routeParams, AccessToken, $modal, templates, Album, $rootScope, $location, Session) {
+function AlbumCtrl($routeParams, $modal, templates, Album, $rootScope, $location, Session) {
 
   var vm = this;
 
-  vm.access_token = AccessToken.get();
-  vm.photos = [];
   vm.albumId = $routeParams.albumId;
+  vm.session = Session.get();
+  vm.photos = [];
 
   $rootScope.$on('SESSION_STARTED', fetchPhotos);
 
