@@ -8,28 +8,31 @@
  * Service in the eversnapApp.services
  */
 angular.module('eversnapApp.services')
-  .factory('Profile', function (Facebook, $q) {
-    var profileUrl = '/me';
+  .factory('Profile', ProfileService);
 
-    var profile = {};
+ProfileService.$inject = ['Facebook', '$q'];
 
-    function getProfile() {
-      return profile
-    }
+function ProfileService(Facebook, $q) {
+  var profile = {};
+  var profileUrl = '/me';
 
-    function fetchProfile() {
-      var deferred = $q.defer();
+  return {
+    get: getProfile,
+    fetch: fetchProfile
+  };
 
-      Facebook.api(profileUrl, function(response){
-        profile = response;
-        deferred.resolve(response);
-      });
+  function getProfile() {
+    return profile
+  }
 
-      return deferred.promise;
-    }
+  function fetchProfile() {
+    var deferred = $q.defer();
 
-    return {
-      get: getProfile,
-      fetch: fetchProfile
-    }
-  });
+    Facebook.api(profileUrl, function(response){
+      profile = response;
+      deferred.resolve(response);
+    });
+
+    return deferred.promise;
+  }
+}

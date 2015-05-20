@@ -8,89 +8,92 @@
  * Service in the eversnapApp.services
  */
 angular.module('eversnapApp.services')
-  .factory('Session', function (Facebook, AccessToken, Album, Profile, $q) {
+  .factory('Session', SessionService);
 
-    var session = {
-      loggedIn: false
-    };
+SessionService.$inject = ['Facebook', 'AccessToken', 'Album', 'Profile', '$q'];
 
-    var sessionPromise = $q.defer();
-    var promise = sessionPromise.promise;
+function SessionService(Facebook, AccessToken, Album, Profile, $q) {
 
-    function getSession() {
-      return session;
-    }
+  var session = {
+    loggedIn: false
+  };
 
-    function login() {
-      var deferred = $q.defer();
-      sessionPromise = $q.defer();
-      promise = sessionPromise.promise;
+  var sessionPromise = $q.defer();
+  var promise = sessionPromise.promise;
 
-      Facebook.login(function(response) {
-        AccessToken.set(response.authResponse.accessToken);
-        getLoginStatus().then(function(){
-          deferred.resolve();
-        });
-      });
+  return {
+    login: login,
+    logout: logout,
+    start: getLoginStatus,
+    get: getSession,
+    started: getPromise
+  };
 
-      return deferred.promise;
-    }
+  function getSession() {
+    return session;
+  }
 
-    function logout() {
-      var deferred = $q.defer();
+  function getPromise() {
+    return promise;
+  }
 
-      Facebook.logout(function() {
-        AccessToken.destroy();
-        Album.destroy();
-        getLoginStatus();
+  function login() {
+    var deferred = $q.defer();
+    sessionPromise = $q.defer();
+    promise = sessionPromise.promise;
+
+    Facebook.login(function(response) {
+      AccessToken.set(response.authResponse.accessToken);
+      getLoginStatus().then(function(){
         deferred.resolve();
       });
+    });
 
-      return deferred.promise;
-    }
+    return deferred.promise;
+  }
 
-    function getLoginStatus() {
-      var deferred = $q.defer();
+  function logout() {
+    var deferred = $q.defer();
 
-      Facebook.getLoginStatus(function(response) {
-        if(response.status === 'connected') {
-          session.loggedIn = true;
+    Facebook.logout(function() {
+      AccessToken.destroy();
+      Album.destroy();
+      getLoginStatus();
+      deferred.resolve();
+    });
 
-          Profile.fetch()
-            .then(function(profile) {
-              Album.fetch(profile.id)
-                .then(function(){
-                  sessionPromise.resolve();
-                  deferred.resolve();
-                }, function(){
-                  console.log('error in fetching album');
-                  sessionPromise.reject();
-                });
-            }, function(){
-              console.log('error in fetching profile');
-              sessionPromise.reject();
-            });
-        }
-        else {
-          session.loggedIn = false;
-          deferred.reject();
-          sessionPromise.reject();
-        }
-      });
+    return deferred.promise;
+  }
 
-      return deferred.promise;
-    }
+  function getLoginStatus() {
+    var deferred = $q.defer();
 
-    function getPromise() {
-      return promise;
-    }
+    Facebook.getLoginStatus(function(response) {
+      if(response.status === 'connected') {
+        session.loggedIn = true;
 
-    return {
-      login: login,
-      logout: logout,
-      start: getLoginStatus,
-      get: getSession,
-      started: getPromise
-    }
+        Profile.fetch()
+          .then(function(profile) {
+            Album.fetch(profile.id)
+              .then(function(){
+                sessionPromise.resolve();
+                deferred.resolve();
+              }, function(){
+                console.log('error in fetching album');
+                sessionPromise.reject();
+              });
+          }, function(){
+            console.log('error in fetching profile');
+            sessionPromise.reject();
+          });
+      }
+      else {
+        session.loggedIn = false;
+        deferred.reject();
+        sessionPromise.reject();
+      }
+    });
 
-  });
+    return deferred.promise;
+  }
+}

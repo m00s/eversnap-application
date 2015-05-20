@@ -1,32 +1,36 @@
 'use strict';
 
 angular.module('eversnapApp.services', ['LocalStorageModule', 'facebook'])
-  .factory('AccessToken', function AccessToken(localStorageService) {
-    var token = localStorageService.get('facebook.session');
+  .factory('AccessToken', AccessTokenService);
 
-    var setToken = function(newToken) {
-      localStorageService.set('facebook.session', newToken) ;
-      token = newToken;
-      return token;
-    };
+AccessTokenService.$inject = ['localStorageService'];
 
-    var isDefined = function() {
-      return !!token;
-    };
+function AccessTokenService(localStorageService) {
+  var token = localStorageService.get('facebook.session');
 
-    var getToken = function() {
-      return token;
-    };
+  return {
+    get: getToken,
+    isDefined: isDefined,
+    set: setToken,
+    destroy: destroyToken
+  };
 
-    var destroyToken = function() {
-      localStorageService.remove('facebook.session');
-      return token = null;
-    };
+  function setToken(newToken) {
+    localStorageService.set('facebook.session', newToken) ;
+    token = newToken;
+    return token;
+  }
 
-    return {
-      get: getToken,
-      isDefined: isDefined,
-      set: setToken,
-      destroy: destroyToken
-    };
-  });
+  function getToken() {
+    return token;
+  }
+
+  function isDefined() {
+    return !!token;
+  }
+
+  function destroyToken() {
+    localStorageService.remove('facebook.session');
+    return token = null;
+  }
+}

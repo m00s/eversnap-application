@@ -8,66 +8,70 @@
  * Service in the eversnapApp.services
  */
 angular.module('eversnapApp.services')
-  .factory('Album', function (Facebook, Profile, AccessToken, $q) {
+  .factory('Album', AlbumService);
 
-    var albums = {};
+AlbumService.$inject = ['Facebook', 'AccessToken', '$q'];
 
-    function fetchAlbum(profileId) {
-      var deferred = $q.defer();
+function AlbumService(Facebook, AccessToken, $q) {
 
-      if(profileId)
-        Facebook.api('/' + profileId + '/albums',
-          function (response) {
-            if (response && !response.error) {
-              albums = response;
-              deferred.resolve(albums);
-            }
-            else {
-              console.error(response.error);
-              deferred.reject(response.error);
-            }
-          });
-      else
-        deferred.reject('No profile id provided');
+  var albums = {};
 
-      return deferred.promise;
-    }
+  return {
+    fetch: fetchAlbum,
+    fetchPhotos: fetchPhotos,
+    destroy: destroy,
+    get: getAlbum
+  };
 
-    function fetchPhotos(id) {
-      var deferred = $q.defer();
+  function fetchAlbum(profileId) {
+    var deferred = $q.defer();
 
-      if(!id)
-        deferred.reject('id required');
+    if(profileId)
+      Facebook.api('/' + profileId + '/albums',
+        function (response) {
+          if (response && !response.error) {
+            albums = response;
+            deferred.resolve(albums);
+          }
+          else {
+            console.error(response.error);
+            deferred.reject(response.error);
+          }
+        });
+    else
+      deferred.reject('No profile id provided');
 
-      Facebook.api('/' + id + '/photos?access_token=' + AccessToken.get(), function(response) {
-        deferred.resolve(response);
-      });
+    return deferred.promise;
+  }
 
-      return deferred.promise;
-    }
+  function fetchPhotos(id) {
+    var deferred = $q.defer();
 
-    function destroy() {
-      albums = {};
-      return albums;
-    }
+    if(!id)
+      deferred.reject('id required');
 
-    function searchById(id) {
-      for(var i = 0; i < albums.data.length; i++) {
-        if(albums.data[i].id == id) {
-          return albums.data[i];
-        }
+    Facebook.api('/' + id + '/photos?access_token=' + AccessToken.get(), function(response) {
+      deferred.resolve(response);
+    });
+
+    return deferred.promise;
+  }
+
+  function destroy() {
+    albums = {};
+    return albums;
+  }
+
+  function searchById(id) {
+    for(var i = 0; i < albums.data.length; i++) {
+      if(albums.data[i].id == id) {
+        return albums.data[i];
       }
-      return null;
     }
+    return null;
+  }
 
-    function getAlbum(id) {
-      return id ? searchById(id) : albums;
-    }
-
-    return {
-      fetch: fetchAlbum,
-      fetchPhotos: fetchPhotos,
-      destroy: destroy,
-      get: getAlbum
-    }
-  });
+  function getAlbum(id) {
+    return id ? searchById(id) : albums;
+  }
+}
