@@ -276,6 +276,21 @@ module.exports = function (grunt) {
       }
     },
 
+    ngdocs: {
+      options: {
+        dest: 'docs',
+        html5Mode: true,
+        startPage: '/api',
+        title: "Assignment application",
+        titleLink: "/api",
+        bestMatch: true
+      },
+      api: {
+        src: ['app/**/*.js', '!app/**/*.spec.js'],
+        title: 'API Documentation'
+      }
+    },
+
     // The following *-min tasks will produce minified files in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
@@ -472,5 +487,9 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('docs', [
+    'ngdocs'
   ]);
 };
