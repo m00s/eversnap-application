@@ -1,4 +1,4 @@
-# Eversnap application
+# Facebook gallery application
 This is a sample application that display albums and photos from facebook using the graph api.
 
 ## Dependencies
